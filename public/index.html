@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="Russian Jazz Service">
+    <title>Russian Jazz Service — Союз Джазовых Музыкантов СПб</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <!-- ШАПКА САЙТА -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Союз Джазовых Музыкантов Санкт-Петербурга</a>
+            </div>
+            <div class="header-controls">
+                <div class="theme-switch desktop-only">
+                    <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+                    <label for="theme-toggle" class="theme-toggle-label">
+                    </label>
+                </div>
+                <button class="hamburger" aria-label="Открыть меню">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="rjs-manifest.html" class="nav-link">Манифест</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+                <div class="mobile-theme-switch">
+                    <div class="theme-switch">
+                        <input type="checkbox" id="mobile-theme-toggle" class="theme-toggle-input">
+                        <label for="mobile-theme-toggle" class="theme-toggle-label">
+                            <span class="theme-text">Темная тема</span>
+                        </label>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- ОТСТУП ПОД ШАПКУ -->
+    <div style="height: 60px"></div>
+
+    <!-- ГЛАВНЫЙ ХЕДЕР С ВИДЕО -->
+    <header class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="assets/video/hero-bg.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Russian Jazz Service</h1>
+            <p>Союз Джазовых Музыкантов Санкт-Петербурга</p>
+            <a href="rjs-manifest.html" class="btn">Манифест</a>
+        </div>
+    </header>
+
+    <!-- О НАС -->
+    <section class="intro-section">
+        <div class="container">
+            <h2>О Союзе</h2>
+            <p>Союз Джазовых Музыкантов Санкт-Петербурга — это объединение музыкантов, которое стремится развивать джазовую культуру в России. Мы создаем пространство для диалога, экспериментов и профессионального роста.</p>
+        </div>
+    </section>
+
+    <!-- НАШИ ПРИНЦИПЫ -->
+    <section class="intro-section">
+        <div class="container">
+            <h2>Наши принципы</h2>
+            <p>Мы руководствуемся пятью основными принципами, которые определяют нашу деятельность и подход к развитию джазовой культуры в России.</p>
+        </div>
+    </section>
+
+    <!-- ЦИТАТА -->
+    <section class="intro-section">
+        <div class="container">
+            <blockquote class="quote">
+                <p class="quote-text">«Идея намного важнее стиля или представлений о стиле, в котором вы пытаетесь играть».</p>
+                <cite class="quote-author">— Орнетт Коулман, саксофонист</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- КОНТЕНТ С ВИДЕО -->
+    <main>
+        <section class="video-section">
+            <blockquote class="quote video-quote">
+                <p class="quote-text">«Все начинается с инициативы одного человека».</p>
+                <cite class="quote-author">— Владимир Фейертаг, музыковед</cite>
+            </blockquote>
+            <video controls autoplay muted loop poster>
+                <source src="assets/video/promo-video.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+            </video>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            © 2025 Russian Jazz Service — официальный сайт Союза Джазовых Музыкантов СПб
+        </p>
+        <p>
+            <a href="index.html">Главная</a> |
+            <a href="rjs-manifest.html">Манифест</a> |
+            <a href="contacts.html">Контакты</a>
+        </p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "russian-jazz-service",
+  "version": "1.0.0",
+  "description": "Russian Jazz Service - Союз Джазовых Музыкантов СПб",
+  "private": true,
+  "scripts": {
+    "dev:admin": "node scripts/manage.js dev:admin",
+    "build:static": "node scripts/manage.js build:static",
+    "build:homepage": "node scripts/build-homepage.js",
+    "serve:static": "node scripts/simple-server.js",
+    "add:demo": "node scripts/add-demo-content.js",
+    "test:mobile": "node scripts/test-mobile.js",
+    "setup": "cd admin && npm install",
+    "postinstall": "npm run setup"
+  },
+  "keywords": [
+    "jazz",
+    "music",
+    "russia",
+    "saint-petersburg",
+    "cms",
+    "nextjs"
+  ],
+  "author": "Russian Jazz Service",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

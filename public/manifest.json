@@ -1,0 +1,10 @@
+{
+  "name": "Russian Jazz Service",
+  "short_name": "RJS",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#d4af37",
+  "icons": [],
+  "description": "Официальный сайт Союза Джазовых Музыкантов Санкт-Петербурга. Манифест, видео, мероприятия."
+}

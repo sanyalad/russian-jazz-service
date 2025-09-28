@@ -1,0 +1,202 @@
+{
+  "principles": [
+    {
+      "id": 2,
+      "order": 1,
+      "title": "Принцип Диалога (The Dialogue Principle):",
+      "description": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "mode": "normal",
+                  "text": "Мы отказываемся от догм и абсолютных истин в музыке. Каждое мнение, стиль, направление заслуживает быть услышанным и рассмотренным. Мы не настаиваем на своей исключительной правоте, создавая пространство для уважительного обмена идеями и творческого спора.",
+                  "type": "text",
+                  "style": "",
+                  "detail": 0,
+                  "format": 0,
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "textStyle": "",
+              "textFormat": 0
+            }
+          ],
+          "direction": null
+        }
+      },
+      "isActive": true,
+      "updatedAt": "2025-09-27T13:40:13.816Z",
+      "createdAt": "2025-09-27T13:40:57.093Z"
+    },
+    {
+      "id": 1,
+      "order": 2,
+      "title": "Демократия Творчества (Creative Democracy):",
+      "description": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "mode": "normal",
+                  "text": "Союз– открытая платформа для всех, кто разделяет наши принципы, вне зависимости от возраста, опыта, школы или жанровых предпочтений. Приветствуется разнообразие: от традиционного джаза до авангарда, фри-джаза, contemporary, джаз-рока, фьюжн, и их взаимодействия с электроникой, хип-хопом, R&B, роком, попом, академической музыкой.",
+                  "type": "text",
+                  "style": "",
+                  "detail": 0,
+                  "format": 0,
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "textStyle": "",
+              "textFormat": 0
+            }
+          ],
+          "direction": null
+        }
+      },
+      "isActive": true,
+      "updatedAt": "2025-09-27T13:41:58.739Z",
+      "createdAt": "2025-09-27T13:40:13.815Z"
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "title": "Авторитет Профессионализма (The Authority of Craft):",
+      "description": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "mode": "normal",
+                  "text": "Демократия не означает вседозволенность. Мы признаем авторитет мастерства, глубины знаний, дисциплины и профессиональной этики. Структура управления Союза сочетает коллегиальность в обсуждениях с эффективной исполнительной властью, ответственной за реализацию решений и проектов.",
+                  "type": "text",
+                  "style": "",
+                  "detail": 0,
+                  "format": 0,
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "textStyle": "",
+              "textFormat": 0
+            }
+          ],
+          "direction": null
+        }
+      },
+      "isActive": true,
+      "updatedAt": "2025-09-27T13:42:59.708Z",
+      "createdAt": "2025-09-27T13:42:59.708Z"
+    },
+    {
+      "id": 4,
+      "order": 4,
+      "title": "Свобода Эксперимента (Freedom to Explore):",
+      "description": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "mode": "normal",
+                  "text": "Мы считаем необходимым активно расширять пространство для свободного, экспериментального и глубокого искусства (фри-джаз, авангард, импровизационная музыка). Поддержка поиска и риска– основа развития джаза.",
+                  "type": "text",
+                  "style": "",
+                  "detail": 0,
+                  "format": 0,
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "textStyle": "",
+              "textFormat": 0
+            }
+          ],
+          "direction": null
+        }
+      },
+      "isActive": true,
+      "updatedAt": "2025-09-27T13:43:47.084Z",
+      "createdAt": "2025-09-27T13:43:47.084Z"
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "title": "Ориентация на Будущее (Future Focus):",
+      "description": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "mode": "normal",
+                  "text": "Привлечение и воспитание новой аудитории– наш приоритет. Мы открыты к современным форматам, технологиям и кросс-культурным проектам, делая джаз актуальным и доступным для молодежи.",
+                  "type": "text",
+                  "style": "",
+                  "detail": 0,
+                  "format": 0,
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "textStyle": "",
+              "textFormat": 0
+            }
+          ],
+          "direction": null
+        }
+      },
+      "isActive": true,
+      "updatedAt": "2025-09-27T13:44:18.089Z",
+      "createdAt": "2025-09-27T13:44:18.089Z"
+    }
+  ],
+  "events": [],
+  "artists": [],
+  "lastUpdated": "2025-09-27T13:47:10.855Z"
+}
