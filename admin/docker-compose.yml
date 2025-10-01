@@ -11,8 +11,8 @@ services:
     working_dir: /home/node/app/
     command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
     depends_on:
-      - mongo
-      # - postgres
+      # - mongo
+      - postgres
     env_file:
       - .env
 
@@ -29,15 +29,19 @@ services:
       driver: none
 
   # Uncomment the following to use postgres
-  # postgres:
-  #   restart: always
-  #   image: postgres:latest
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: russian_jazz_service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 volumes:
   data:
-  # pgdata:
+  pgdata:
   node_modules:

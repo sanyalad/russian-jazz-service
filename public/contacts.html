@@ -2,24 +2,40 @@
 <html lang="ru" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="Russian Jazz Service">
     <title>Контакты — Russian Jazz Service</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="mobile-web-app-capable" content="yes" />
-
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script>
+        // Предотвращение мерцания темы при загрузке
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                // Если тема не сохранена, устанавливаем темную по умолчанию
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Дополнительная проверка для надежности
+            document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        })();
+    </script>
   </head>
   <body>
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
       <div class="container">
         <div class="logo">
-          <a href="index.html">Союз Джазовых Музыкантов Санкт-Петербурга</a>
+          <a href="index.html">
+            <img src="assets/images/logo.svg" alt="Russian Jazz Service" class="logo-img">
+            <span class="logo-text">Союз Джазовых Музыкантов Санкт-Петербурга</span>
+          </a>
         </div>
             <div class="header-controls">
                 <div class="theme-switch desktop-only">

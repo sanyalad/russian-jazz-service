@@ -162,18 +162,17 @@ function initThemeToggle() {
   const themeToggleInput = document.querySelector('.theme-toggle-input');
   const mobileThemeToggleInput = document.querySelector('#mobile-theme-toggle');
   
-  if (!themeToggleInput && !mobileThemeToggleInput) return;
-  
   // Получаем сохраненную тему или устанавливаем темную по умолчанию
   let savedTheme = localStorage.getItem('theme');
   
-  // Принудительно устанавливаем темную тему по умолчанию
+  // Устанавливаем темную тему по умолчанию только если тема не сохранена
   if (!savedTheme) {
     localStorage.setItem('theme', 'dark');
     savedTheme = 'dark';
   }
   
-  document.documentElement.setAttribute('data-theme', savedTheme);
+  // Применяем тему сразу при загрузке страницы
+  applyTheme(savedTheme);
   
   // Устанавливаем состояние переключателей
   if (themeToggleInput) {
@@ -215,9 +214,17 @@ function initThemeToggle() {
     });
   }
   
+  // Функция для применения темы
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    updateVideoTheme(theme);
+    updateMetaTheme(theme);
+    updateMobileThemeText(theme);
+  }
+  
   function updateTheme(newTheme, oldTheme) {
     // Применяем новую тему
-    document.documentElement.setAttribute('data-theme', newTheme);
+    applyTheme(newTheme);
     
     // Сохраняем выбор пользователя
     localStorage.setItem('theme', newTheme);
@@ -233,47 +240,63 @@ function initThemeToggle() {
     window.dispatchEvent(new CustomEvent('themeChanged', {
       detail: { theme: newTheme }
     }));
-    
-    // Обновляем видео
-    updateVideoTheme(newTheme);
-    
-    // Обновляем meta теги для мобильных
-    updateMetaTheme(newTheme);
-    
-    // Обновляем текст в мобильном переключателе
-    updateMobileThemeText(newTheme);
   }
   
   // Слушаем изменения темы на других страницах
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme' && e.newValue) {
       const newTheme = e.newValue;
-      document.documentElement.setAttribute('data-theme', newTheme);
+      applyTheme(newTheme);
+      
+      // Синхронизируем переключатели
       if (themeToggleInput) {
         themeToggleInput.checked = newTheme === 'light';
       }
       if (mobileThemeToggleInput) {
         mobileThemeToggleInput.checked = newTheme === 'light';
       }
-      updateVideoTheme(newTheme);
-      updateMetaTheme(newTheme);
-      updateMobileThemeText(newTheme);
     }
   });
   
   // Слушаем изменения темы в текущей вкладке
   window.addEventListener('themeChanged', (e) => {
     const newTheme = e.detail.theme;
-    document.documentElement.setAttribute('data-theme', newTheme);
+    applyTheme(newTheme);
+    
+    // Синхронизируем переключатели
     if (themeToggleInput) {
       themeToggleInput.checked = newTheme === 'light';
     }
     if (mobileThemeToggleInput) {
       mobileThemeToggleInput.checked = newTheme === 'light';
     }
-    updateVideoTheme(newTheme);
-    updateMetaTheme(newTheme);
-    updateMobileThemeText(newTheme);
+  });
+  
+  // Дополнительная синхронизация при загрузке страницы
+  window.addEventListener('load', () => {
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(currentTheme);
+    
+    // Синхронизируем переключатели
+    if (themeToggleInput) {
+      themeToggleInput.checked = currentTheme === 'light';
+    }
+    if (mobileThemeToggleInput) {
+      mobileThemeToggleInput.checked = currentTheme === 'light';
+    }
+  });
+  
+  // Синхронизация при фокусе на окне (когда пользователь возвращается на вкладку)
+  window.addEventListener('focus', () => {
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(currentTheme);
+    
+    if (themeToggleInput) {
+      themeToggleInput.checked = currentTheme === 'light';
+    }
+    if (mobileThemeToggleInput) {
+      mobileThemeToggleInput.checked = currentTheme === 'light';
+    }
   });
 }
 
@@ -406,5 +429,36 @@ function updateMetaTheme(theme) {
   metaStatusBar.content = statusBarStyle;
 }
 
+// Синхронизация темы при переходе между страницами
+function syncThemeOnNavigation() {
+  // Обрабатываем все ссылки навигации
+  const navLinks = document.querySelectorAll('a[href]');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Сохраняем текущую тему перед переходом
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme) {
+        localStorage.setItem('theme', currentTheme);
+        
+        // Дополнительная проверка через небольшую задержку
+        setTimeout(() => {
+          localStorage.setItem('theme', currentTheme);
+        }, 10);
+      }
+    });
+  });
+  
+  // Дополнительно сохраняем тему при уходе со страницы
+  window.addEventListener('beforeunload', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme) {
+      localStorage.setItem('theme', currentTheme);
+    }
+  });
+}
+
 // Инициализация переключателя тем
-document.addEventListener('DOMContentLoaded', initThemeToggle);
+document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+  syncThemeOnNavigation();
+});

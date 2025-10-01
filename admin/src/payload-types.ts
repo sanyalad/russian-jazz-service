@@ -70,8 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     'manifest-principles': ManifestPrinciple;
-    events: Event;
-    artists: Artist;
     'home-page': HomePage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,8 +80,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'manifest-principles': ManifestPrinciplesSelect<false> | ManifestPrinciplesSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
-    artists: ArtistsSelect<false> | ArtistsSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -122,11 +118,25 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Управление пользователями системы
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  /**
+   * Имя пользователя
+   */
+  firstName: string;
+  /**
+   * Фамилия пользователя
+   */
+  lastName: string;
+  /**
+   * Роль пользователя в системе
+   */
+  role?: ('admin' | 'editor' | 'author' | 'reader') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -146,12 +156,25 @@ export interface User {
   password?: string | null;
 }
 /**
+ * Управление медиафайлами (изображения, видео)
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Альтернативный текст для изображения
+   */
   alt: string;
+  /**
+   * Подпись к изображению
+   */
+  caption?: string | null;
+  /**
+   * Категория медиафайла
+   */
+  category?: ('general' | 'manifest' | 'homepage' | 'video') | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -163,8 +186,36 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    feature?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
+ * Управление принципами манифеста
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "manifest-principles".
  */
@@ -197,6 +248,10 @@ export interface ManifestPrinciple {
     [k: string]: unknown;
   };
   /**
+   * Изображение для карточки принципа
+   */
+  image?: (number | null) | Media;
+  /**
    * Отображать ли принцип на сайте
    */
   isActive?: boolean | null;
@@ -204,86 +259,8 @@ export interface ManifestPrinciple {
   createdAt: string;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  title: string;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  date: string;
-  /**
-   * Время проведения (например: 19:00)
-   */
-  time?: string | null;
-  location: string;
-  address?: string | null;
-  /**
-   * Стоимость билетов
-   */
-  price?: string | null;
-  image?: (number | null) | Media;
-  artists?:
-    | {
-        name: string;
-        instrument?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  isActive?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "artists".
- */
-export interface Artist {
-  id: number;
-  name: string;
-  instrument: string;
-  bio?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  photo?: (number | null) | Media;
-  socialLinks?:
-    | {
-        platform: 'instagram' | 'facebook' | 'youtube' | 'vk' | 'telegram';
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
-  isActive?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
+ * Управление контентом главной страницы
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page".
  */
@@ -293,6 +270,9 @@ export interface HomePage {
   subtitle: string;
   heroVideo?: (number | null) | Media;
   aboutTitle: string;
+  /**
+   * Описание о союзе джазовых музыкантов
+   */
   aboutText: {
     root: {
       type: string;
@@ -309,6 +289,9 @@ export interface HomePage {
     [k: string]: unknown;
   };
   principlesTitle: string;
+  /**
+   * Описание принципов работы союза
+   */
   principlesText: {
     root: {
       type: string;
@@ -350,14 +333,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'manifest-principles';
         value: number | ManifestPrinciple;
-      } | null)
-    | ({
-        relationTo: 'events';
-        value: number | Event;
-      } | null)
-    | ({
-        relationTo: 'artists';
-        value: number | Artist;
       } | null)
     | ({
         relationTo: 'home-page';
@@ -410,6 +385,9 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -433,6 +411,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -444,6 +424,40 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        feature?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -453,50 +467,7 @@ export interface ManifestPrinciplesSelect<T extends boolean = true> {
   order?: T;
   title?: T;
   description?: T;
-  isActive?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
- */
-export interface EventsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  date?: T;
-  time?: T;
-  location?: T;
-  address?: T;
-  price?: T;
   image?: T;
-  artists?:
-    | T
-    | {
-        name?: T;
-        instrument?: T;
-        id?: T;
-      };
-  isActive?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "artists_select".
- */
-export interface ArtistsSelect<T extends boolean = true> {
-  name?: T;
-  instrument?: T;
-  bio?: T;
-  photo?: T;
-  socialLinks?:
-    | T
-    | {
-        platform?: T;
-        url?: T;
-        id?: T;
-      };
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;

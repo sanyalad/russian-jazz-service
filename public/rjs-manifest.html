@@ -11,13 +11,31 @@
     <meta name="apple-mobile-web-app-title" content="Russian Jazz Service">
     <title>Манифест — Russian Jazz Service</title>
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script>
+        // Предотвращение мерцания темы при загрузке
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                // Если тема не сохранена, устанавливаем темную по умолчанию
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Дополнительная проверка для надежности
+            document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        })();
+    </script>
 </head>
 <body>
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container">
             <div class="logo">
-                <a href="index.html">Союз Джазовых Музыкантов Санкт-Петербурга</a>
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="Russian Jazz Service" class="logo-img">
+                    <span class="logo-text">Союз Джазовых Музыкантов Санкт-Петербурга</span>
+                </a>
             </div>
             <div class="header-controls">
                 <div class="theme-switch desktop-only">
@@ -60,7 +78,7 @@
         <div class="manifest-overlay"></div>
         <div class="manifest-content">
             <h1>Манифест</h1>
-            <p>Русской Службы Джаза</p>
+            <p>Русская Джазовая Служба</p>
             <p>(Manifesto of the Russian Jazz Service)</p>
             <a href="index.html" class="btn">← Назад на главную</a>
         </div>

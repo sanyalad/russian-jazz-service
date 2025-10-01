@@ -27,15 +27,15 @@ html {
 
 /* Светлая тема кнопки */
 [data-theme="light"] .btn {
-  color: #ffffff;
-  border-color: #ffffff;
+  color: #2a2a2a;
+  border-color: #2a2a2a;
   background: transparent;
 }
 
 [data-theme="light"] .btn:hover {
-  background: #6c757d;
+  background: #2a2a2a;
   color: #ffffff;
-  border-color: #6c757d;
+  border-color: #2a2a2a;
 }
 
 [data-theme="light"] .btn-primary {
@@ -337,10 +337,39 @@ p, a, button {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo a:hover {
   color: var(--accent-color);
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  transition: filter 0.3s ease;
+}
+
+.logo a:hover .logo-img {
+  filter: brightness(1.2);
+}
+
+.logo-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .logo-text {
+    display: inline;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo-img {
+    height: 35px;
+  }
 }
 
 .header-controls {
@@ -362,18 +391,25 @@ p, a, button {
   margin-left: auto;
   margin-right: 200px;
   align-items: center;
+  position: relative;
 }
 
 .nav-link {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 1rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: color 0.3s;
   position: relative;
+  padding: 0.75rem 0;
+  display: block;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  line-height: 1.4;
+  background: transparent;
 }
 
 .nav-link:hover {
@@ -493,20 +529,27 @@ p, a, button {
 
 /* Активное состояние навигации */
 .main-nav.active {
-  display: flex;
-  position: fixed;
-  top: 60px;
-  right: 0;
-  width: 250px;
-  height: calc(100vh - 60px);
-  background: var(--bg-primary);
-  flex-direction: column;
-  padding: 1.5rem;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
-  overflow-y: auto;
+  display: flex !important;
+  position: fixed !important;
+  top: 60px !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 250px !important;
+  height: auto !important;
+  max-height: calc(100vh - 60px) !important;
+  background: var(--bg-primary) !important;
+  flex-direction: column !important;
+  padding: 1.5rem !important;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3) !important;
+  z-index: 100 !important;
+  transform: translateX(0) !important;
+  transition: transform 0.3s ease-in-out !important;
+  overflow-y: auto !important;
+  border-left: 1px solid var(--border-color) !important;
+  border-radius: 0 0 0 8px !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  align-items: stretch !important;
 }
 
 /* Мобильный переключатель темы */
@@ -515,6 +558,10 @@ p, a, button {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
   display: none;
+}
+
+.nav-link:last-of-type {
+  border-bottom: none;
 }
 
 .mobile-theme-switch .theme-switch {
@@ -528,13 +575,20 @@ p, a, button {
 .mobile-theme-switch .theme-text {
   color: var(--text-primary);
   font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
   text-align: center;
+  line-height: 1.2;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  display: block;
+  width: 100%;
 }
 
 .mobile-theme-switch .theme-toggle-label {
   align-self: center;
+  margin: 0 auto;
+  display: block;
 }
 
 /* Скрытие десктопного переключателя на мобильных */
@@ -598,6 +652,23 @@ p, a, button {
   margin-top: 0;
 }
 
+/* Стили для кликабельного заголовка принципов */
+.principles-title-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.principles-title-link:hover {
+  color: var(--accent-color);
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
 .intro-section p {
   color: var(--text-secondary);
   margin: 20px 0;
@@ -627,6 +698,14 @@ p, a, button {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для кликабельного заголовка принципов в светлой теме */
+[data-theme="light"] .principles-title-link:hover {
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
 }
 
 [data-theme="light"] .intro-section p {
@@ -749,8 +828,9 @@ p, a, button {
   text-align: center;
   z-index: 2;
   padding: 0 2rem;
-  max-width: 900px;
+  max-width: 100%;
   position: relative;
+  margin: 0 auto;
 }
 
 .manifest-content h1 {
@@ -776,8 +856,9 @@ p, a, button {
   list-style: none;
   padding: 0;
   margin: 4rem auto;
-  max-width: 1000px;
+  max-width: 1200px;
   position: relative;
+  width: 100%;
 }
 
 .manifest-principles::after {
@@ -1238,6 +1319,26 @@ footer a:hover {
     display: none; /* Скрываем навигацию на мобильных */
   }
   
+  .main-nav.active {
+    display: flex !important; /* Принудительно показываем активное меню */
+    position: fixed !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 220px !important;
+    padding: 1rem !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-theme-switch {
+    display: block;
+  }
+  
   .desktop-only {
     display: none; /* Скрываем десктопный переключатель */
   }
@@ -1349,6 +1450,26 @@ footer a:hover {
     display: none; /* Скрываем навигацию на мобильных */
   }
   
+  .main-nav.active {
+    display: flex !important; /* Принудительно показываем активное меню */
+    position: fixed !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 200px !important;
+    padding: 0.75rem !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-theme-switch {
+    display: block;
+  }
+  
   .desktop-only {
     display: none; /* Скрываем десктопный переключатель */
   }
@@ -1401,6 +1522,12 @@ footer a:hover {
     display: block;
     width: auto;
     max-width: 200px;
+  }
+
+  /* Мобильные стили для кликабельного заголовка принципов */
+  .principles-title-link:hover {
+    transform: none; /* Отключаем transform на мобильных */
+    box-shadow: none; /* Отключаем box-shadow на мобильных */
   }
   
   .intro-section p {
@@ -1477,6 +1604,23 @@ footer a:hover {
     font-size: 0.9rem;
     line-height: 1.6;
   }
+  
+  /* Мобильные стили для футера манифеста */
+  .manifest-footer {
+    padding: 2rem 1rem;
+    margin-top: 1rem;
+  }
+  
+  .manifest-footer p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .manifest-footer .btn {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+  }
 }
 
 /* ——— MANIFEST FOOTER ——— */
@@ -1484,6 +1628,10 @@ footer a:hover {
   padding: 4rem 0;
   text-align: center;
   margin-top: 2rem;
+  width: 100%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .manifest-footer p {
@@ -1491,6 +1639,18 @@ footer a:hover {
   margin-bottom: 2rem;
   font-size: 1rem;
   line-height: 1.6;
+}
+
+.manifest-footer .btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.manifest-footer .btn:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ——— CONTACTS PAGE ——— */

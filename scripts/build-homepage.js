@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 // Конфигурация
-const API_URL = process.env.API_URL || 'http://localhost:3003'
+const API_URL = process.env.API_URL || 'http://localhost:3000'
 const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'generated')
 
 async function fetchContent() {
@@ -19,10 +19,18 @@ async function fetchContent() {
 }
 
 function generateHomePage(homePageData) {
-  const aboutText = homePageData?.aboutText?.root?.children?.[0]?.children?.[0]?.text || 
+  // Функция для извлечения текста из richText
+  function extractTextFromRichText(richText) {
+    if (!richText?.root?.children) return '';
+    return richText.root.children
+      .map(child => child.children?.map(grandChild => grandChild.text || '').join('') || '')
+      .join(' ');
+  }
+
+  const aboutText = extractTextFromRichText(homePageData?.aboutText) || 
     'Союз Джазовых Музыкантов Санкт-Петербурга — это объединение музыкантов, которое стремится развивать джазовую культуру в России. Мы создаем пространство для диалога, экспериментов и профессионального роста.';
   
-  const principlesText = homePageData?.principlesText?.root?.children?.[0]?.children?.[0]?.text || 
+  const principlesText = extractTextFromRichText(homePageData?.principlesText) || 
     'Мы руководствуемся пятью основными принципами, которые определяют нашу деятельность и подход к развитию джазовой культуры в России.';
 
   const quoteText = homePageData?.quote?.text || 
@@ -52,19 +60,36 @@ function generateHomePage(homePageData) {
     <meta name="apple-mobile-web-app-title" content="Russian Jazz Service">
     <title>${homePageData?.title || 'Russian Jazz Service'} — ${homePageData?.subtitle || 'Союз Джазовых Музыкантов СПб'}</title>
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script>
+        // Предотвращение мерцания темы при загрузке
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                // Если тема не сохранена, устанавливаем темную по умолчанию
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Дополнительная проверка для надежности
+            document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        })();
+    </script>
 </head>
 <body>
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container">
             <div class="logo">
-                <a href="index.html">${homePageData?.subtitle || 'Союз Джазовых Музыкантов Санкт-Петербурга'}</a>
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="Russian Jazz Service" class="logo-img">
+                    <span class="logo-text">${homePageData?.subtitle || 'Союз Джазовых Музыкантов Санкт-Петербурга'}</span>
+                </a>
             </div>
             <div class="header-controls">
-                <div class="theme-switch">
+                <div class="theme-switch desktop-only">
                     <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
                     <label for="theme-toggle" class="theme-toggle-label">
-                        <span class="theme-icon">🌙</span>
                     </label>
                 </div>
                 <button class="hamburger" aria-label="Открыть меню">
@@ -77,6 +102,14 @@ function generateHomePage(homePageData) {
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="rjs-manifest.html" class="nav-link">Манифест</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
+                <div class="mobile-theme-switch">
+                    <div class="theme-switch">
+                        <input type="checkbox" id="mobile-theme-toggle" class="theme-toggle-input">
+                        <label for="mobile-theme-toggle" class="theme-toggle-label">
+                            <span class="theme-text">Темная тема</span>
+                        </label>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -109,11 +142,8 @@ function generateHomePage(homePageData) {
     <!-- НАШИ ПРИНЦИПЫ -->
     <section class="intro-section">
         <div class="container">
-            <h2>${homePageData?.principlesTitle || 'Наши принципы'}</h2>
+            <h2><a href="rjs-manifest.html" class="principles-title-link">${homePageData?.principlesTitle || 'Наши принципы'}</a></h2>
             <p>${principlesText}</p>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="rjs-manifest.html" class="btn">Читать полный манифест</a>
-            </div>
         </div>
     </section>
 

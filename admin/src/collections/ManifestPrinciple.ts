@@ -5,6 +5,7 @@ export const ManifestPrinciple: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'order', 'createdAt'],
+    description: 'Управление принципами манифеста',
   },
   access: {
     read: () => true,
@@ -30,8 +31,29 @@ export const ManifestPrinciple: CollectionConfig = {
       name: 'description',
       type: 'richText',
       required: true,
+      defaultValue: {
+        root: {
+          children: [
+            {
+              children: [
+                {
+                  text: 'Описание принципа будет добавлено здесь.'
+                }
+              ]
+            }
+          ]
+        }
+      },
       admin: {
         description: 'Описание принципа',
+      },
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Изображение для карточки принципа',
       },
     },
     {
