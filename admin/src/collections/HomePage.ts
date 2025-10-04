@@ -4,7 +4,6 @@ export const HomePage: CollectionConfig = {
   slug: 'home-page',
   admin: {
     useAsTitle: 'title',
-    singleton: true, // Это делает коллекцию синглтоном - только одна запись
     description: 'Управление контентом главной страницы',
   },
   fields: [
