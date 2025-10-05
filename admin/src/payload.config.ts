@@ -28,13 +28,11 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: process.env.DATABASE_URI 
-    ? postgresAdapter({
-        pool: {
-          connectionString: process.env.DATABASE_URI,
-        },
-      })
-    : undefined, // Временно отключаем базу данных для тестирования
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI || 'postgresql://postgres:password@localhost:5432/russian_jazz_service',
+    },
+  }),
   sharp,
   plugins: [
     payloadCloudPlugin(),
